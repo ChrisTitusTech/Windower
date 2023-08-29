@@ -1,0 +1,23 @@
+keyboard_allowmmf 1
+
+console_position 15 50
+console_color 255 255 0 0
+console_displayactivity 1
+console_fadedelay 3500
+console_screendir screenshots
+
+bind f12 showfps
+bind sysrq screenshot jpg hide
+bind ^v paste
+
+lua load parse
+lua load PartyBuffs
+lua load skillchains
+lua load XIPivot
+
+// WAIT 30 seconds and Character load before loading this part
+wait 30
+
+lua load GearInfo
+config FrameRateDivisor 1
+lua load xivparty

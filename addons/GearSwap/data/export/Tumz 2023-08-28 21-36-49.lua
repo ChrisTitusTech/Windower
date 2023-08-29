@@ -1,0 +1,17 @@
+sets.exported={
+    main={ name="Gae Derg +1", augments={'Path: A',}},
+    sub="Eletta Grip",
+    ammo="Hasty Pinion +1",
+    head="Sulevia's Mask +2",
+    body="Flamma Korazin +2",
+    hands="Sulev. Gauntlets +2",
+    legs="Sulev. Cuisses +2",
+    feet="Flam. Gambieras +2",
+    neck="Asperity Necklace",
+    waist="Ioskeha Belt",
+    left_ear="Brutal Earring",
+    right_ear="Cessance Earring",
+    left_ring="Chirich Ring",
+    right_ring="Moonbeam Ring",
+    back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Damage taken-5%',}},
+}
