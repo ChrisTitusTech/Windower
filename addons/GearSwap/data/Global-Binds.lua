@@ -57,6 +57,8 @@
     send_command('bind !i input /ma "Aquaveil" <me>')
     send_command('bind !o input /ma "Cure IV" <stpc>')
 
+    send_command('bind numpad9 input /targetnpc')
+
     -- Default Status Cure HotKeys
     send_command('bind !numpad7 input /ma "Paralyna" <t>')
     send_command('bind !numpad8 input /ma "Silena" <t>')
@@ -64,10 +66,6 @@
     send_command('bind !numpad4 input /ma "Poisona" <t>')
     send_command('bind !numpad5 input /ma "Stona" <t>')
     send_command('bind !numpad6 input /ma "Viruna" <t>')
-    send_command('bind !numpad1 input /ma "Cursna" <t>')
-    send_command('bind !numpad+ input /ma "Erase" <t>')
-    send_command('bind !numpad0 input /ma "Sacrifice" <t>')
-    send_command('bind !numpad. input /ma "Esuna" <me>')
 
     -- Default Status Enfeebling HotKeys
     send_command('bind ~numpad7 input /ma "Paralyze" <t>')

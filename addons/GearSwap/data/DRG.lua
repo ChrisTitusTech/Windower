@@ -743,7 +743,7 @@ windower.register_event('zone change',
 function select_default_macro_book()
     -- Default macro set/book: (set, book)
     --if player.sub_job == 'SAM' then
-        set_macro_page(1, 8)
+        set_macro_page(2, 1)
     --else
         --set_macro_page(2, 8)
     --end

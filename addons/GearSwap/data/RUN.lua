@@ -10,6 +10,8 @@ function get_sets()
 	-- Load and initialize the include file.
     mote_include_version = 2
 	include('Mote-Include.lua')
+    -- Additional local binds
+    include('Global-Binds.lua')
     state.Runes = {"Tellus","Unda","Flabra","Ignis","Gelus","Sulpor","Lux","Tenebrae"}
 end
 
@@ -25,10 +27,35 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-        
-    
+    include('Mote-TreasureHunter')
+    state.TreasureMode:options('None','Tag')
+    send_command('bind f9 gs c cycle TreasureMode')
     send_command('bind ^[ input /lockstyle on')
     send_command('bind ` input /ws "Dimidiation" <t>')
+    send_command('bind ^` input /ws "Resolution" <t>')
+    send_command('bind numpad0 input /ma "Foil" <me>')
+    send_command('bind numpad. input /ma "Crusade" <me>')
+    send_command('bind numpad3 input /ma "Refresh" <me>')
+    send_command('bind numpad1 input /ma "Phalanx" <me>')
+    send_command('bind !numpad0 input /ja "Swipe" <t>')
+    send_command('bind !numpad. input /ja "Swordplay" <me>')
+    send_command('bind !numpad3 input /ma "Temper" <me>')
+    send_command('bind !numpad1 input /ja "Rayke" <t>')
+    send_command('bind ^numpad0 input /ja "Pflug" <me>')
+    send_command('bind ^numpad. input /ja "Elemental Sforzo" <me> ')
+    send_command('bind ^numpad3 input /ma "Shell V" <me>')
+    send_command('bind ^numpad1 input /ma "Protect IV" <me>')
+    
+
+    if player.sub_job == 'DRK' then
+        send_command('bind ^numpad/ input /ja "Souleater" <me>')
+        send_command('bind ^numpad* input /ja "Weapon Bash" <t>')
+        send_command('bind ^numpad- input /ja "Last Resort" <me>')
+    elseif player.sub_job == 'SAM' then
+        send_command('bind ^numpad/ input /ja "Meditate" <me>')
+        send_command('bind ^numpad* input /ja "Sekkanoki" <me>')
+        send_command('bind ^numpad- input /ja "Third Eye" <me>')
+    end
     
     select_default_macro_book()
 end
@@ -110,28 +137,6 @@ function init_gear_sets()
     sets.precast.Waltz = {}
     
     
-    -- Defense sets
-    sets.defense.PDT = {
-        main="Epeolatry",
-        sub="Eletta Grip",
-        ammo="Staunch Tathlum",
-        head="Aya. Zucchetto +2",
-        body="Runeist Coat +1",
-        hands="Turms Mittens",
-        legs="Aya. Cosciales +2",
-        feet="Aya. Gambieras +2",
-        neck={ name="Futhark Torque", augments={'Path: A',}},
-        waist="Flume Belt",
-        left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-        right_ear="Ethereal Earring",
-        left_ring="Moonbeam Ring",
-        right_ring="Vocane Ring",
-        back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Store TP"+10','Parrying rate+5%',}},
-    }
-    
-    sets.defense.MDT = set_combine(sets.defense.PDT, {
-
-    })
     
     --sets.Kiting = {feet="Hermes' Sandals"}
     
@@ -153,11 +158,37 @@ function init_gear_sets()
         right_ring="Chirich Ring",
         back={ name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Store TP"+10','Parrying rate+5%',}},
     }
+
+    sets.TreasureHunter = set_combine(sets.engaged, {
+        ammo="Per. Lucky Egg",
+    })
+
+    sets.defense.PDT = {
+        head="Aya. Zucchetto +2",
+        body="Runeist Coat +1",
+        hands="Turms Mittens",
+        legs="Aya. Cosciales +2",
+        feet="Aya. Gambieras +2",
+        neck={ name="Futhark Torque", augments={'Path: A',}},
+        waist="Flume Belt",
+        left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+        right_ear="Ethereal Earring",
+        left_ring="Moonbeam Ring",
+        right_ring="Vocane Ring",
+    }
     
-    sets.engaged.PDT = sets.defense.PDT
+    sets.engaged.PDT = set_combine(sets.defense.PDT, sets.engaged)
+
+    sets.defense.MDT = {
+
+    }
+
+    sets.engaged.MDT = set_combine(sets.defense.MDT, sets.engaged)
+
+    sets.idle = sets.engaged
     sets.resting = sets.engaged
     	
-    -- Weaponskill sets
+    -- Weaponskill sets --
     sets.precast.WS = {
         ammo="Hagneia Stone",
         head="Sukeroku Hachi.",
@@ -178,6 +209,9 @@ function init_gear_sets()
         
     })
     
+    sets.precast.WS.Dimidiation = set_combine(sets.precast.WS, {
+        
+    })
     
 end
 
@@ -234,6 +268,12 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 	end
 end
 
+function midcast(spell,action)
+    if spell.english == 'Sneak' or spell.english == 'Spectral Jig' or spell.english:startswith('Monomi') and spell.target.type == 'SELF' then
+        send_command('cancel 71')
+    end
+end
+
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
 	return idleSet
@@ -275,6 +315,10 @@ end
 function job_update(cmdParams, eventArgs)
 	--state.CombatForm = get_combat_form()
     --state.CombatWeapon = get_combat_weapon()
+end
+
+function status_change(new,action)
+    send_command('input /lockstyle on')
 end
 
 -- Set eventArgs.handled to true if we don't want the automatic display to be run.
