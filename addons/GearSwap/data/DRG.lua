@@ -373,13 +373,13 @@ function init_gear_sets()
         main={ name="Gae Derg +1", augments={'Path: A',}},
         sub="Eletta Grip",
         ammo="Hasty Pinion +1",
-        head="Sulevia's Mask +2",
+        head="Flam. Zucchetto +2",
         body="Flamma Korazin +2",
         hands="Sulev. Gauntlets +2",
         legs="Sulev. Cuisses +2",
         feet="Flam. Gambieras +2",
-        neck="Asperity Necklace",
-        waist="Ioskeha Belt",
+        neck="Dgn. Collar +1",
+        waist="Sailfi Belt +1",
         left_ear="Brutal Earring",
         right_ear="Cessance Earring",
         left_ring="Chirich Ring",
@@ -388,17 +388,19 @@ function init_gear_sets()
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        ammo="Staunch Tathlum +1", --3/3
-        body="Hjarrandi Breast.", --12/12
-        head="Hjarrandi Helm", --10/10
-        hands="Flam. Manopolas +2",
-        feet="Ptero. Greaves +3",
-        neck="Loricate Torque +1", --6/6
-        ear1="Sanare Earring",
-        ear2="Anastasi Earring",
-        ring1="Moonlight Ring", --5/5
-        ring2="Defending Ring", --10/10
-        waist="Carrier's Sash",
+        ammo="Staunch Tathlum",
+        head="Sulevia's Mask +2",
+        body="Sulevia's Plate. +2",
+        hands="Sulev. Gauntlets +2",
+        legs="Sulev. Cuisses +2",
+        feet="Flam. Gambieras +2",
+        neck="Dgn. Collar +1",
+        waist="Sailfi Belt +1",
+        left_ear="Cessance Earring",
+        right_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+        left_ring="Vocane Ring",
+        right_ring="Moonbeam Ring",
+        back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Damage taken-5%',}},
         })
 
     sets.idle.Pet = set_combine(sets.idle, {
@@ -444,13 +446,13 @@ function init_gear_sets()
         main={ name="Gae Derg +1", augments={'Path: A',}},
         sub="Eletta Grip",
         ammo="Hasty Pinion +1",
-        head="Sulevia's Mask +2",
+        head="Flam. Zucchetto +2",
         body="Flamma Korazin +2",
         hands="Sulev. Gauntlets +2",
         legs="Sulev. Cuisses +2",
         feet="Flam. Gambieras +2",
-        neck="Asperity Necklace",
-        waist="Ioskeha Belt",
+        neck="Dgn. Collar +1",
+        waist="Sailfi Belt +1",
         left_ear="Brutal Earring",
         right_ear="Cessance Earring",
         left_ring="Chirich Ring",
@@ -459,32 +461,30 @@ function init_gear_sets()
         }
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
-        ear2="Cessance Earring",
-        waist="Ioskeha Belt +1",
+        waist="Ioskeha Belt",
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-        ammo="Voluspa Tathlum",
-        neck="Combatant's Torque",
-        ring1="Flamma Ring",
-        ear2="Telos Earring",
+        --ammo="Voluspa Tathlum",
+        --ring1="Flamma Ring",
+        --ear2="Telos Earring",
         })
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
-        ammo="Amar Cluster",
-        body="Emicho Haubert +1",
-        hands="Emi. Gauntlets +1",
-        legs=gear.Valo_STP_legs,
-        ring1="Regal Ring",
+        --ammo="Amar Cluster",
+        --body="Emicho Haubert +1",
+        --hands="Emi. Gauntlets +1",
+        --legs=gear.Valo_STP_legs,
+        --ring1="Regal Ring",
         })
 
     sets.engaged.MaxAcc = set_combine(sets.engaged.HighAcc, {
-        body="Vishap Mail +3",
-        head="Vishap Armet",
-        legs="Ptero. Brais +3",
-        feet="Vishap Greaves",
-        ear2="Mache Earring +1",
-        ring1="Flamma Ring",
+        --body="Vishap Mail +3",
+        --head="Vishap Armet",
+        --legs="Ptero. Brais +3",
+        --feet="Vishap Greaves",
+        --ear2="Mache Earring",
+        --ring1="Flamma Ring",
         })
 
     sets.engaged.STP = set_combine(sets.engaged, {
@@ -500,10 +500,10 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {
-        neck="Loricate Torque +1", --6/6
-        body="Vishap Mail +3",
+        --neck="Loricate Torque +1", --6/6
+        --body="Vishap Mail +3",
         ring1="Moonlight Ring", --5/5
-        ring2="Defending Ring", --10/10
+        --ring2="Defending Ring", --10/10
         }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
@@ -517,10 +517,10 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.buff.Doom = {
-        neck="Nicander's Necklace", --20
-        ring1={name="Eshmun's Ring", bag="wardrobe3"}, --20
-        ring2={name="Eshmun's Ring", bag="wardrobe4"}, --20
-        waist="Gishdubar Sash", --10
+        --neck="Nicander's Necklace", --20
+        --ring1={name="Eshmun's Ring", bag="wardrobe3"}, --20
+        --ring2={name="Eshmun's Ring", bag="wardrobe4"}, --20
+        --waist="Gishdubar Sash", --10
         }
 
     -- sets.CP = {back="Mecisto. Mantle"}
@@ -599,7 +599,8 @@ function job_buff_change(buff,gain)
     end
 
     if buff == 'Hasso' and not gain then
-        add_to_chat(167, 'Hasso just expired!')
+        add_to_chat(167, 'Recasting Hasso!')
+        send_command('input /ja "' .. buff .. '" <me>')
     end
 
 end

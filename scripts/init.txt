@@ -10,7 +10,6 @@ bind f12 showfps
 bind sysrq screenshot jpg hide
 bind ^v paste
 
-lua load parse
 lua load PartyBuffs
 lua load skillchains
 lua load XIPivot
@@ -20,4 +19,3 @@ wait 30
 
 lua load GearInfo
 config FrameRateDivisor 1
-lua load xivparty
